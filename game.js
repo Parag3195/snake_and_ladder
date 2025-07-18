@@ -1,10 +1,39 @@
 let tog = 1;
-let rollingSound = new Audio('rpg-dice-rolling-95182.mp3');
-let winSound = new Audio('winharpsichord-39642.mp3');
+let gameStarted = false;
+
+let rollingSound = new Audio('./dice-roll.mp3');
+let winSound = new Audio('./win-sound.mp3');
 
 let p1sum = 0;
 let p2sum = 0;
 
+// Disable game UI before start
+document.querySelector('.game-container').style.display = 'none';
+document.getElementById('diceBtn').disabled = true;
+
+// START GAME FUNCTION
+function startGame() {
+    const p1Color = document.getElementById('p1Color').value;
+    const p2Color = document.getElementById('p2Color').value;
+
+    if (p1Color === p2Color) {
+        alert("Players must choose different colors!");
+        return;
+    }
+
+    const pawn1 = document.getElementById('p1');
+    const pawn2 = document.getElementById('p2');
+
+    pawn1.style.backgroundColor = p1Color;
+    pawn2.style.backgroundColor = p2Color;
+
+    document.getElementById('startScreen').style.display = 'none';
+    document.querySelector('.game-container').style.display = 'flex';
+    document.getElementById('diceBtn').disabled = false;
+    gameStarted = true;
+}
+
+// PAWN MOVEMENT FUNCTION
 function play(player, psum, correction, num) {
     let sum;
 
@@ -71,7 +100,7 @@ function play(player, psum, correction, num) {
     } else if (sum === 100) {
         winSound.play();
         setTimeout(() => {
-            alert(player === 'p1' ? "Red Won!!" : "Yellow Won!!");
+            alert(player === 'p1' ? "Player 1 Won!! 🎉" : "Player 2 Won!! 🎉");
             location.reload();
         }, 100);
         return;
@@ -109,10 +138,15 @@ function play(player, psum, correction, num) {
     pawn.classList.add('jump');
 }
 
+// ROLL DICE EVENT
 document.getElementById("diceBtn").addEventListener("click", function () {
-    num = Math.floor(Math.random() * 6) + 1;
+    if (!gameStarted) return;
 
-    // Dice animation
+    let num = Math.floor(Math.random() * 6) + 1;
+    rollingSound.play();
+
+    const cube = document.getElementById('cube');
+
     const spinX = 360 * (Math.floor(Math.random() * 4) + 1);
     const spinY = 360 * (Math.floor(Math.random() * 4) + 1);
 
@@ -151,16 +185,14 @@ document.getElementById("diceBtn").addEventListener("click", function () {
 
     cube.style.transform = `rotateX(${finalX}deg) rotateY(${finalY}deg)`;
 
-    // Play the turn
     setTimeout(() => {
-    if (tog % 2 !== 0) {
-        document.getElementById('tog').innerText = "Yellow's Turn";
-        play('p1', 'p1sum', 0, num);
-    } else {
-        document.getElementById('tog').innerText = "Red's Turn";
-        play('p2', 'p2sum', 55, num);
-    }
-}, 800); // delay in milliseconds
-
-tog++;
+        if (tog % 2 !== 0) {
+            document.getElementById('tog').innerText = "Player 2's Turn";
+            play('p1', 'p1sum', 0, num);
+        } else {
+            document.getElementById('tog').innerText = "Player 1's Turn";
+            play('p2', 'p2sum', 55, num);
+        }
+        tog++;
+    }, 800);
 });

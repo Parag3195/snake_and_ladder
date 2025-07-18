@@ -5,7 +5,28 @@
 
 body {
   display: grid;
+  padding: 8px;
   place-items: center;
+  font-family: 'comicsan', cursive ;
+  background-color: #ebd6c3;
+
+}
+.start-btn{
+    background-color: #12343b;
+}
+.start-btn:hover{
+    background-color:#2d545e;
+
+}
+label,select{
+    padding: 8px;
+    width: 150px;
+    font-weight: 800;
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+  font-family: 'comicsan', cursive ;
+  border-radius: 15px;
 
 }
 .game-container {
@@ -115,11 +136,15 @@ img {
 }
 #diceBtn {
   z-index: 99;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
-  background-color: rgb(75, 140, 197);
+  background-color: rgb(35, 71, 102);
   border-radius: 5px;
-  width: 200px;
+  width: 150px;
+  margin-top: 30px;
+}
+#diceBtn:hover {
+  background-color: rgb(50, 100, 150);
 }
 /* dice */
 .scene {

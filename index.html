@@ -11,8 +11,29 @@
 
 
 <body>
-
     <h1>Snakes and ladder</h1>
+<div id="startScreen" style="text-align:center; padding: 20px;">
+  <h2>Choose Player Colors</h2>
+  <label for="p1Color">Player 1:</label>
+  <select id="p1Color">
+    <option value="rgb(236, 82, 82)">Red</option>
+    <option value="rgb(243, 181, 46)">Yellow</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+  </select>
+
+  <label for="p2Color" style="margin-left:20px;">Player 2:</label>
+  <select id="p2Color">
+    <option value="rgb(243, 181, 46)">Yellow</option>
+    <option value="rgb(236, 82, 82)">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+  </select>
+
+  <br><br>
+  <button class="start-btn" onclick="startGame()">Play</button>
+</div>
+
 
     <!-- <div id="diceCont">
         <p id="dice">0</p>
@@ -21,7 +42,7 @@
     <div class="game-container">
   <div class="left-panel">
     <div class="scene">
-      <p id="tog">Red's Turn</p>
+      <p id="tog">Player 1's Turn</p>
       <div class="cube" id="cube">
         <div class="face one">1</div>
         <div class="face two">2</div>
