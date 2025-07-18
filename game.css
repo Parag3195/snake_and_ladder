@@ -56,11 +56,28 @@ body {
 
   /* position: absolute; */
 }
+/* pawn jump   */
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+}
+
+.jump {
+  animation: jump 1.8s ease;
+}
+
 
 #p1 {
   position: relative;
   top: 0px;
-  transition: all linear 0.5s;
+  transition: all linear 0.8s;
   /* top: 0; */
   left: -62px;
   z-index: 2;
@@ -74,6 +91,9 @@ body {
   transition: all linear 0.5s;
   background-color: rgb(243, 181, 46);
 }
+
+
+
 
 img {
   position: relative;
